@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+"http://www.w3.org/TR/html4/strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>ACME Hammers, Inc. Commission Calculator</title>
+		<meta name="author" content="Alex" />
+		<!-- Date: 2015-04-01 -->
+	</head>
+	<body>
+		<script type="text/javascript">
+		///FILE: CommissionCalculator.html
+		///PROG: Alex Mandigo
+		///PURP: To calculate the amount of commission earned by employees
+		
+		var userName = "";
+		var PART_TIME_RATE = 0.035;
+		var FULL_NORM_RATE = 0.05;
+		var FULL_GOOD_RATE = 0.075;
+		var GOOD_SALES_MIN = 10000.00;
+		var status = "";
+		var totalSales = 0.00;
+		var statusDisplay = "";
+		var commissionRate = 0.0;
+		var commissionEarned = 0.00;
+		var companyProfit = 0.00;	
+		
+		///Input
+		userName = prompt("Greetings, ACME Hammers employee! What is your name?","");
+		status = prompt("Hey, " + userName + ". Are you (F)ull time or (P)art time? Please enter either (F) or (P).","F");
+		totalSales = prompt("What are your total sales?","0.0");
+		
+		///Conversion
+		status = status.toUpperCase();
+		totalSales = parseFloat(totalSales);
+		
+		///Calculations
+		if (status == "F") 
+		{///Begin first if
+	    	statusDisplay = "Full time";
+			if (totalSales >= GOOD_SALES_MIN) 
+			{///Begin second if
+				commissionRate = FULL_GOOD_RATE;
+			}
+			else
+			{
+				commissionRate = FULL_NORM_RATE;
+			}///End second if
+		}
+		else
+		{
+			statusDisplay = "Part time";
+			commissionRate = PART_TIME_RATE;
+		}///End first if
+		
+		commissionEarned = totalSales * commissionRate;
+		companyProfit = totalSales - commissionEarned;
+		
+		///Output
+		document.write("Hey, " + userName + ". To recap, this is what you've told me:<br>");	
+		document.write("You are a " + statusDisplay + " employee.<br>");
+		document.write("Your total sales equal $" + totalSales.toFixed(2) + ".<br>");
+		document.write("Based on these inputs...<br>");
+		document.write("Your rate of commission equals " + commissionRate + ".<br>");
+		document.write("Which, in dollars, comes out to be $" + commissionEarned.toFixed(2) + ".<br>");
+		document.write("And to top it off, you earned ACME Hammers, Inc. $" + companyProfit.toFixed(2) + ".<br>");
+		document.write("Good job, " + userName + "! Now go back out and sell more stuff!");
+		
+		///END PROGRAM
+		</script>
+	</body>
+</html>
+
